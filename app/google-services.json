@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "771029862317",
+    "firebase_url": "https://ti-tip-21012.firebaseio.com",
+    "project_id": "ti-tip-21012",
+    "storage_bucket": "ti-tip-21012.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771029862317:android:a9d42e736ca8bf32440324",
+        "android_client_info": {
+          "package_name": "com.rpljumat.ti_tip"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "771029862317-n2epqh3rec19df6cctfonsf5qpuukdfj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsW9zFYKVbfwO80yQBtLX3qEqhhoCTWrI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "771029862317-n2epqh3rec19df6cctfonsf5qpuukdfj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771029862317:android:e6d8c21eacac7c15440324",
+        "android_client_info": {
+          "package_name": "com.rpljumat.ti_tipagent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "771029862317-n2epqh3rec19df6cctfonsf5qpuukdfj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsW9zFYKVbfwO80yQBtLX3qEqhhoCTWrI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "771029862317-n2epqh3rec19df6cctfonsf5qpuukdfj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Ti-Tip Agent</string>
+    <string name="dashboard_goods_history_btn">Riwayat Titipan</string>
+    <string name="dashboard_needs_attention">Perlu Perhatian</string>
+    <string name="dashboard_active">Titipan</string>
+    <string name="dashboard_more_active">Selengkapnya >></string>
+</resources>
