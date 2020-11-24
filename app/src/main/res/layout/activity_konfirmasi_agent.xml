@@ -94,7 +94,7 @@
         android:layout_width="wrap_content"
         android:text="@string/tombol_konfirmasi"
         android:textColor="@color/black"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_marginTop="50dp"
         android:background="@color/btn_yellow"
         app:layout_constraintEnd_toEndOf="parent"
