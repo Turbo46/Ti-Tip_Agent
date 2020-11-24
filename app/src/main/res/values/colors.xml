@@ -20,6 +20,7 @@
     <color name="stat_red">#B00000</color>
     <color name="btn_green">#00A424</color>
     <color name="btn_orange">#F3A632</color>
+    <color name="btn_yellow">#EBEF14</color>
 
     <color name="btn_bg">#6200EE</color>
     <color name="chk_bg">#6200EE</color>

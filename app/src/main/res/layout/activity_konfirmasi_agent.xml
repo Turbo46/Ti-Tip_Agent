@@ -11,7 +11,7 @@
         android:id="@+id/logo_konfirmasi_agent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:src="@drawable/ic_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,83 +42,62 @@
         android:id="@+id/id_titipan"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="16dp"
         android:background="@color/frame_back_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/konfirmasi_text" />
 
     <EditText
         android:id="@+id/nama_titipan"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="16dp"
         android:background="@color/frame_back_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/id_titipan" />
 
     <EditText
         android:id="@+id/nama_penitip"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="320dp"
+        android:layout_marginTop="16dp"
         android:background="@color/frame_back_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/nama_titipan" />
 
     <EditText
         android:id="@+id/jenis_barang"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="360dp"
+        android:layout_marginTop="16dp"
         android:background="@color/frame_back_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/nama_titipan" />
 
 
     <EditText
         android:id="@+id/tanggal_kadalwarsa"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="16dp"
         android:background="@color/frame_back_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/jenis_barang" />
 
-    <ImageView
-        android:id="@+id/konfirmasi_tombol"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="460dp"
-        android:src="@drawable/ic_konfirmasi_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/text_konfirmasi"
+    <Button
+        android:id="@+id/tombol_konfirmasi"
         android:layout_width="wrap_content"
+        android:text="@string/tombol_konfirmasi"
+        android:textColor="@color/black"
         android:layout_height="wrap_content"
-        android:text="@string/peringatan_text"
-        android:layout_marginTop="520dp"
+        android:layout_marginTop="50dp"
+        android:background="@color/btn_yellow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/lanjutan_konfirmasi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="535dp"
-        android:text="@string/lanjutan_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-
+        app:layout_constraintTop_toBottomOf="@id/tanggal_kadalwarsa" />
 </androidx.constraintlayout.widget.ConstraintLayout>
