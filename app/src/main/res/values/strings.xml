@@ -5,4 +5,8 @@
     <string name="dashboard_needs_attention">Perlu Perhatian</string>
     <string name="dashboard_active">Titipan</string>
     <string name="dashboard_more_active">Selengkapnya >></string>
+    <string name="konfirmasi_titipan_user">Konfirmasi Ringkasan Titipan</string>
+    <string name="tombol_konfirmasi">Konfirmasi</string>
+    <string name="lanjutan_text">sebelum melakukan konfirmasi</string>
+    <string name="peringatan_text">Anda masih bisa untuk mengubah pesanan</string>
 </resources>
