@@ -7,6 +7,11 @@
     <string name="dashboard_more_active">Selengkapnya >></string>
     <string name="konfirmasi_titipan_agent">Konfirmasi Ringkasan Titipan Dari Customer</string>
     <string name="tombol_konfirmasi">Terima</string>
+    <string name="username_label">Username</string>
+    <string name="password_label">Password</string>
+    <string name="login_btn_txt">Login</string>
+    <string name="register_question">Apakah anda tidak mempunyai akun?</string>
+    <string name="reg_btn_txt">Registrasi</string>
     <string name="titipan_berjalan">Titipan berjalan</string>
     <string name="peringatan_text">Anda masih bisa untuk mengubah pesanan</string>
     <string name="lanjutan_text">sebelum melakukan konfirmasi</string>
