@@ -7,7 +7,12 @@
     <string name="dashboard_more_active">Selengkapnya >></string>
     <string name="konfirmasi_titipan_agent">Konfirmasi Ringkasan Titipan Dari Customer</string>
     <string name="tombol_konfirmasi">Terima</string>
+    <string name="help_txt">Ada 2 jenis akun yang bisa anda buat</string>
     <string name="username_label">Username</string>
+    <string name="user_acc_txt">1.Akun User</string>
+    <string name="agent_acc_txt">2.Akun Agent</string>
+    <string name="agent_info_txt">Anda dapat memilih akun agent jika ingin menjadi mitra kerja dari Ti-tip.Agent akan bertindak sebagai penghubung antara merchant dan user,yang nantinya akan mengantar titipan ke tempat user</string>
+    <string name="user_info_txt">Akun user dapat anda pilih jika ingin memakai layanan Ti-tip.Dimana layanan dapat dipakai secara penuh setelah melakukan registrasi</string>
     <string name="ket2_txt">Butuh penjelasan mengenai akun?</string>
     <string name="help_btn">Help</string>
     <string name="password_label">Password</string>
