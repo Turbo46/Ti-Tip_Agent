@@ -8,7 +8,12 @@
     <string name="konfirmasi_titipan_agent">Konfirmasi Ringkasan Titipan Dari Customer</string>
     <string name="tombol_konfirmasi">Terima</string>
     <string name="username_label">Username</string>
+    <string name="ket2_txt">Butuh penjelasan mengenai akun?</string>
+    <string name="help_btn">Help</string>
     <string name="password_label">Password</string>
+    <string name="agen_btn">Agent</string>
+    <string name="user_btn">User</string>
+    <string name="ket_txt">Silahkan pilih akun yang ingin anda buat</string>
     <string name="login_btn_txt">Login</string>
     <string name="register_question">Apakah anda tidak mempunyai akun?</string>
     <string name="reg_btn_txt">Registrasi</string>
