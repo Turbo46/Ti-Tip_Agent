@@ -2,7 +2,7 @@
 <resources>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
+    <color name="purple_700">#FFEB3B</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
@@ -20,6 +20,7 @@
     <color name="stat_red">#B00000</color>
     <color name="btn_green">#00A424</color>
     <color name="btn_orange">#F3A632</color>
+    <color name="btn_yellow">#EBEF14</color>
 
     <color name="btn_bg">#6200EE</color>
     <color name="chk_bg">#6200EE</color>

@@ -1,7 +1,28 @@
 <resources>
     <string name="app_name">Ti-Tip Agent</string>
     <string name="dashboard_goods_history_btn">Riwayat Titipan</string>
+    <string name="history_text">Riwayat Titipan</string>
     <string name="dashboard_needs_attention">Perlu Perhatian</string>
     <string name="dashboard_active">Titipan</string>
     <string name="dashboard_more_active">Selengkapnya >></string>
+    <string name="konfirmasi_titipan_agent">Konfirmasi Ringkasan Titipan Dari Customer</string>
+    <string name="tombol_konfirmasi">Terima</string>
+    <string name="help_txt">Ada 2 jenis akun yang bisa anda buat</string>
+    <string name="username_label">Username</string>
+    <string name="user_acc_txt">1.Akun User</string>
+    <string name="agent_acc_txt">2.Akun Agent</string>
+    <string name="agent_info_txt">Anda dapat memilih akun agent jika ingin menjadi mitra kerja dari Ti-tip.Agent akan bertindak sebagai penghubung antara merchant dan user,yang nantinya akan mengantar titipan ke tempat user</string>
+    <string name="user_info_txt">Akun user dapat anda pilih jika ingin memakai layanan Ti-tip.Dimana layanan dapat dipakai secara penuh setelah melakukan registrasi</string>
+    <string name="ket2_txt">Butuh penjelasan mengenai akun?</string>
+    <string name="help_btn">Help</string>
+    <string name="password_label">Password</string>
+    <string name="agen_btn">Agent</string>
+    <string name="user_btn">User</string>
+    <string name="ket_txt">Silahkan pilih akun yang ingin anda buat</string>
+    <string name="login_btn_txt">Login</string>
+    <string name="register_question">Apakah anda tidak mempunyai akun?</string>
+    <string name="reg_btn_txt">Registrasi</string>
+    <string name="titipan_berjalan">Titipan berjalan</string>
+    <string name="peringatan_text">Anda masih bisa untuk mengubah pesanan</string>
+    <string name="lanjutan_text">sebelum melakukan konfirmasi</string>
 </resources>
