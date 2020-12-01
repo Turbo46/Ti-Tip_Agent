@@ -22,6 +22,7 @@
     <string name="password_label">Password</string>
     <string name="agen_btn">Agent</string>
     <string name="user_btn">User</string>
+    <string name="login_btn">Login</string>
     <string name="ket_txt">Silahkan pilih akun yang ingin anda buat</string>
     <string name="login_btn_txt">Login</string>
     <string name="register_question">Apakah anda tidak mempunyai akun?</string>
