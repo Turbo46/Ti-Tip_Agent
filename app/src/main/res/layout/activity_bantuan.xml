@@ -18,6 +18,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/tombol_back_help"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:src="@drawable/ic_back"
+        android:scaleX="2"
+        android:background="@color/transparent"
+        android:scaleY="2"
+        android:scaleType="center"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <TextView
         android:id="@+id/help_title"
         android:layout_width="wrap_content"
@@ -30,41 +44,16 @@
         app:layout_constraintTop_toBottomOf="@id/logo"/>
 
     <TextView
-        android:id="@+id/help_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="227dp"
-        android:text="@string/user_acc_txt"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/help_title" />
-
-    <TextView
-        android:id="@+id/user_info"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="128dp"
-        android:layout_marginEnd="128dp"
-        android:lineSpacingExtra="8dp"
-        android:text="@string/user_info_txt"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/help_user" />
-
-    <TextView
         android:id="@+id/help_agent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="218dp"
+        android:layout_marginEnd="228dp"
         android:text="@string/agent_acc_txt"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/user_info" />
+        app:layout_constraintTop_toBottomOf="@id/help_title" />
 
     <TextView
         android:id="@+id/agent_info"
