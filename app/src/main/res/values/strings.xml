@@ -30,4 +30,11 @@
     <string name="peringatan_text">Anda masih bisa untuk mengubah pesanan</string>
     <string name="lanjutan_text">sebelum melakukan konfirmasi</string>
     <string name="nama_penanggung_jawab">Nama Penanggung Jawab</string>
+    <string name="titipan_baru_param_dimensi_txt">Dimensi:</string>
+    <string name="titipan_baru_param_length_txt">Panjang:</string>
+    <string name="titipan_baru_param_width_txt">Lebar:</string>
+    <string name="titipan_baru_param_height_txt">Tinggi:</string>
+    <string name="titipan_baru_param_weight_txt">Berat:</string>
+    <string name="centimeter">cm</string>
+    <string name="kilogram">kg</string>
 </resources>

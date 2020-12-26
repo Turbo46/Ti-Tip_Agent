@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/container_param"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/titipan_baru_param_dimensi_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/titipan_baru_param_dimensi_txt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/titipan_baru_param_length_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/titipan_baru_param_length_txt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titipan_baru_param_dimensi_txt" />
+
+        <EditText
+            android:id="@+id/titipan_baru_param_length"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:inputType="numberDecimal"
+            android:imeOptions="actionNext"
+            app:layout_constraintBottom_toBottomOf="@id/titipan_baru_param_length_txt"
+            app:layout_constraintStart_toEndOf="@id/titipan_baru_param_length_txt"
+            app:layout_constraintTop_toTopOf="@id/titipan_baru_param_length_txt" />
+
+        <TextView
+            android:id="@+id/titipan_baru_param_length_cm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/centimeter"
+            app:layout_constraintBottom_toBottomOf="@id/titipan_baru_param_length"
+            app:layout_constraintStart_toEndOf="@id/titipan_baru_param_length"
+            app:layout_constraintTop_toTopOf="@id/titipan_baru_param_length" />
+
+        <TextView
+            android:id="@+id/titipan_baru_param_width_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/titipan_baru_param_width_txt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titipan_baru_param_length_txt" />
+
+        <EditText
+            android:id="@+id/titipan_baru_param_width"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:inputType="numberDecimal"
+            android:imeOptions="actionNext"
+            app:layout_constraintBottom_toBottomOf="@id/titipan_baru_param_width_txt"
+            app:layout_constraintStart_toEndOf="@id/titipan_baru_param_width_txt"
+            app:layout_constraintTop_toTopOf="@id/titipan_baru_param_width_txt" />
+
+        <TextView
+            android:id="@+id/titipan_baru_param_width_cm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/centimeter"
+            app:layout_constraintBottom_toBottomOf="@id/titipan_baru_param_width"
+            app:layout_constraintStart_toEndOf="@id/titipan_baru_param_width"
+            app:layout_constraintTop_toTopOf="@id/titipan_baru_param_width" />
+
+        <TextView
+            android:id="@+id/titipan_baru_param_height_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/titipan_baru_param_height_txt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titipan_baru_param_width_txt" />
+
+        <EditText
+            android:id="@+id/titipan_baru_param_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:inputType="numberDecimal"
+            android:imeOptions="actionNext"
+            app:layout_constraintBottom_toBottomOf="@id/titipan_baru_param_height_txt"
+            app:layout_constraintStart_toEndOf="@id/titipan_baru_param_height_txt"
+            app:layout_constraintTop_toTopOf="@id/titipan_baru_param_height_txt" />
+
+        <TextView
+            android:id="@+id/titipan_baru_param_height_cm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/centimeter"
+            app:layout_constraintBottom_toBottomOf="@id/titipan_baru_param_height"
+            app:layout_constraintStart_toEndOf="@id/titipan_baru_param_height"
+            app:layout_constraintTop_toTopOf="@id/titipan_baru_param_height" />
+
+        <TextView
+            android:id="@+id/titipan_baru_param_weight_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/titipan_baru_param_weight_txt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titipan_baru_param_height_txt" />
+
+        <EditText
+            android:id="@+id/titipan_baru_param_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:inputType="numberDecimal"
+            app:layout_constraintBottom_toBottomOf="@id/titipan_baru_param_weight_txt"
+            app:layout_constraintStart_toEndOf="@id/titipan_baru_param_weight_txt"
+            app:layout_constraintTop_toTopOf="@id/titipan_baru_param_weight_txt" />
+
+        <TextView
+            android:id="@+id/titipan_baru_param_weight_kg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/kilogram"
+            app:layout_constraintBottom_toBottomOf="@id/titipan_baru_param_weight"
+            app:layout_constraintStart_toEndOf="@id/titipan_baru_param_weight"
+            app:layout_constraintTop_toTopOf="@id/titipan_baru_param_weight" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
