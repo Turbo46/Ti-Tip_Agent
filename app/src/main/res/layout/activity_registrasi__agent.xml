@@ -5,32 +5,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
-    tools:context=".Registrasi_Agent">
+    tools:context=".RegistrasiAgent">
+
     <ImageView
         android:id="@+id/logo"
         android:layout_width="81dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="32dp"
         android:scaleType="center"
-        android:scaleX="2"
-        android:scaleY="2"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
         android:src="@drawable/ic_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/fullname_text"
+        android:id="@+id/agent_name_text"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="32dp"
         android:background="@color/frame_back_bg"
-        android:hint="@string/nama_penanggung_jawab"
+        android:hint="@string/agent_name_label"
         android:inputType="text"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/logo" />
+
+
+    <EditText
+        android:id="@+id/fullname_text"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/frame_back_bg"
+        android:hint="@string/nama_penanggung_jawab"
+        android:inputType="textPersonName"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/agent_name_text" />
     <EditText
         android:id="@+id/username_text"
         android:inputType="text"
@@ -69,7 +84,7 @@
         android:textColor="@color/black"/>
     <EditText
         android:id="@+id/email_text"
-        android:inputType="text"
+        android:inputType="textEmailAddress"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -81,7 +96,7 @@
         android:textColor="@color/black"/>
     <EditText
         android:id="@+id/pass_text"
-        android:inputType="text"
+        android:inputType="textPassword"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -92,65 +107,68 @@
         android:hint="@string/password_label"
         android:textColor="@color/black"/>
 
-    <EditText
-        android:inputType="text"
-        android:id="@+id/alamat_text"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@color/frame_back_bg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pass_text"
-        android:hint="@string/alamat_label"
-        android:textColor="@color/black"/>
-
-    <TextView
-        android:id="@+id/keterangan_bantuan"
-        android:text="@string/ket2_txt"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/center_guideline_regis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:textColor="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <TextView
+        android:id="@+id/addr_label_regis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/alamat_label"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@id/center_guideline_regis"
+        app:layout_constraintTop_toBottomOf="@id/pass_text" />
+
+    <Button
+        android:id="@+id/sel_loc_btn_regis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@color/btn_bg"
+        android:text="@string/choose_loc"
+        app:layout_constraintBottom_toBottomOf="@+id/addr_label_regis"
+        app:layout_constraintStart_toStartOf="@id/center_guideline_regis"
+        app:layout_constraintTop_toTopOf="@id/addr_label_regis" />
+
+    <TextView
+        android:id="@+id/sel_loc_regis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/regis_btn" />
+        app:layout_constraintTop_toBottomOf="@id/sel_loc_btn_regis" />
 
     <Button
         android:id="@+id/regis_btn"
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="110dp"
+        android:layout_marginEnd="8dp"
         android:background="@color/btn_yellow"
         android:text="@string/reg_btn_txt"
         android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/alamat_text" />
+        app:layout_constraintEnd_toEndOf="@id/center_guideline_regis"
+        app:layout_constraintTop_toBottomOf="@id/sel_loc_regis" />
 
     <Button
         android:id="@+id/login_regis_btn"
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_marginStart="110dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:background="@color/btn_yellow"
         android:text="@string/login_btn"
         android:textColor="@color/black"
-        android:background="@color/btn_yellow"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/alamat_text" />
+        app:layout_constraintStart_toStartOf="@id/center_guideline_regis"
+        app:layout_constraintTop_toBottomOf="@id/sel_loc_regis" />
 
-    <Button
-        android:id="@+id/bantuan_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/btn_yellow"
-        android:text="@string/help_btn"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/keterangan_bantuan"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

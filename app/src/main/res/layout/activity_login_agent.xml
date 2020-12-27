@@ -21,8 +21,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/username_text"
-        android:inputType="text"
+        android:id="@+id/email_text"
+        android:inputType="textEmailAddress"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
@@ -30,7 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/logo"
         android:background="@color/frame_back_bg"
-        android:hint="@string/username_label"
+        android:hint="@string/mail_label"
         android:textColor="@color/black"/>
 
     <EditText
@@ -44,7 +44,7 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/username_text" />
+        app:layout_constraintTop_toBottomOf="@id/email_text" />
 
     <Button
         android:id="@+id/login_btn"

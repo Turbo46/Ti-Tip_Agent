@@ -2,28 +2,34 @@ package com.rpljumat.ti_tipagent
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.app.NotificationManager
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Typeface
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.constraintlayout.widget.Constraints
+import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
-import com.google.firebase.firestore.SetOptions
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.layout_new_goods_param.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class Dashboard : AppCompatActivity() {
     var conn = false
@@ -49,10 +55,9 @@ class Dashboard : AppCompatActivity() {
         expand_need_attention.tag = R.drawable.ic_collapse
         expand_active.tag = R.drawable.ic_collapse
 
-//        val auth = FirebaseAuth.getInstance()
-//        val currentUser = auth.currentUser
-//        agentId = currentUser?.uid.toString()
-        agentId = "1234"
+        val auth = FirebaseAuth.getInstance()
+        val currentUser = auth.currentUser
+        agentId = currentUser?.uid.toString()
 
         val db = FirebaseFirestore.getInstance()
         db.collection("goods").get()
@@ -64,7 +69,7 @@ class Dashboard : AppCompatActivity() {
             }
 
         user_icon.setOnClickListener {
-
+            
         }
 
         goods_history_btn_dashboard.setOnClickListener {
@@ -172,7 +177,11 @@ class Dashboard : AppCompatActivity() {
                 val goodAgentId = data["agentId"] as String
                 val goodAgentDest = data["agentDest"].toString()
                 val status = (data["status"] as Long).toInt()
-                if(goodAgentId != agentId && status != AWAITING_PINDAH_TITIP_DEST) continue
+
+                when(status) {
+                    REJECTED, RETURNED, EXPIRED -> continue
+                }
+                if(!(status == AWAITING_PINDAH_TITIP_DEST).xor(goodAgentId == agentId)) continue
 
                 val nama = data["nama"] as String
                 val uId = data["userId"] as String
@@ -180,9 +189,13 @@ class Dashboard : AppCompatActivity() {
                 val estPrice = (data["estPrice"] as Long).toInt()
                 val grocery = data["grocery"] as Boolean
                 val fragile = data["fragile"] as Boolean
-                val pindahTitipPrice = if(status == AWAITING_PINDAH_TITIP_ORG)
-                    (data["pindahTitipPrice"] as Long).toInt() else 0
-                val ts = if(status != RETURNED) (data["ts"] as Long).toDT() else ""
+                val pindahTitipPrice = when(status) {
+                    AWAITING_PINDAH_TITIP_ORG, AWAITING_PINDAH_TITIP_DEST -> {
+                        (data["pindahTitipPrice"] as Long).toInt()
+                    }
+                    else -> 0
+                }
+                val ts = (data["ts"] as Long).toDT()
                 val exp = (data["exp"] as Long).toDT()
 
                 when(status) {
@@ -192,23 +205,19 @@ class Dashboard : AppCompatActivity() {
                         prevIdAtt = containerId
                         attCnt++
                     }
-                    else -> {
+                    STORED -> {
                         if(activeCnt == 5) continue
                         containerId = createTitipanItemBg(prevIdActive, ACTIVE_BLOCK)
                         prevIdActive = containerId
                         activeCnt++
                     }
+                    else -> return@launch
                 }
 
                 var prevIdInner = createTitipanItemTitle(nama)
                 prevIdInner = createTitipanItemStatus(prevIdInner, status)
                 prevIdInner = createTitipanItemUserFullName(prevIdInner, userFullName)
-
-                when(status) {
-                    NEW_GOODS, STORED, AWAITING_PINDAH_TITIP_ORG, AWAITING_PINDAH_TITIP_DEST,
-                    REQ_RETURN -> prevIdInner =
-                        createTitipanItemFragileGrocery(prevIdInner, fragile, grocery)
-                }
+                prevIdInner = createTitipanItemFragileGrocery(prevIdInner, fragile, grocery)
 
                 when(status) {
                     AWAITING_PINDAH_TITIP_ORG -> {
@@ -219,15 +228,13 @@ class Dashboard : AppCompatActivity() {
                     }
                 }
 
-                when(status) {
-                    STORED, AWAITING_PINDAH_TITIP_ORG, AWAITING_PINDAH_TITIP_DEST, REQ_RETURN -> {
-                        val length = (data["length"] as Double).toFloat()
-                        val width = (data["width"] as Double).toFloat()
-                        val height = (data["height"] as Double).toFloat()
-                        val weight = (data["weight"] as Double).toFloat()
-                        prevIdInner =
-                            createTitipanItemDimWeight(prevIdInner, length, width, height, weight)
-                    }
+                if(status != NEW_GOODS) {
+                    val length = (data["length"] as Double).toFloat()
+                    val width = (data["width"] as Double).toFloat()
+                    val height = (data["height"] as Double).toFloat()
+                    val weight = (data["weight"] as Double).toFloat()
+                    prevIdInner =
+                        createTitipanItemDimWeight(prevIdInner, length, width, height, weight)
                 }
 
                 when(status) {
@@ -237,24 +244,12 @@ class Dashboard : AppCompatActivity() {
                         createTitipanItemCost(prevIdInner, pindahTitipPrice, status)
                 }
 
-                when(status) {
-                    NEW_GOODS, STORED, AWAITING_PINDAH_TITIP_ORG, AWAITING_PINDAH_TITIP_DEST ->
-                        prevIdInner = createTitipanItemTs(prevIdInner, ts, status)
-                }
-
-                when(status) {
-                    NEW_GOODS, STORED, AWAITING_PINDAH_TITIP_ORG, AWAITING_PINDAH_TITIP_DEST,
-                    REQ_RETURN -> prevIdInner = createTitipanItemExp(prevIdInner, exp)
-                }
-
-                if(status == RETURNED) {
-                    val returnTs = data["returnTs"] as Long
-                    prevIdInner = createTitipanItemReturnTs(prevIdInner, returnTs)
-                }
+                if(status != REQ_RETURN) prevIdInner = createTitipanItemTs(prevIdInner, ts, status)
+                prevIdInner = createTitipanItemExp(prevIdInner, exp)
 
                 // Action menus
-                createTitipanItemActions(prevIdInner, goodId, status, grocery,
-                    goodAgentDest, estPrice, pindahTitipPrice)
+                createTitipanItemActions(prevIdInner, goodId, nama, status, grocery,
+                    goodAgentId, goodAgentDest, estPrice, pindahTitipPrice)
             }
 
             setAttCnt(attCnt)
@@ -460,6 +455,7 @@ class Dashboard : AppCompatActivity() {
             else -> ""
         }
         locTextView.text = text
+        locTextView.setTextColor(black)
 
         val container = findViewById<ConstraintLayout>(containerId)
         container.addView(locTextView)
@@ -585,47 +581,21 @@ class Dashboard : AppCompatActivity() {
         return id
     }
 
-    private fun createTitipanItemReturnTs(prevId: Int, returnTs: Long): Int {
-        val returnTsTextView = TextView(this)
-        returnTsTextView.layoutParams = Constraints.LayoutParams(
-            Constraints.LayoutParams.WRAP_CONTENT,
-            Constraints.LayoutParams.WRAP_CONTENT
-        )
-
-        val id = View.generateViewId()
-        returnTsTextView.id = id
-
-        val dtStr = returnTs.toDT()
-
-        val text = "Dikembalikan pada: $dtStr"
-        returnTsTextView.text = text
-        returnTsTextView.setTextColor(black)
-
-        val container = findViewById<ConstraintLayout>(containerId)
-        container.addView(returnTsTextView)
-
-        val constraintSet = ConstraintSet()
-        constraintSet.clone(container)
-        constraintSet.connect(id, ConstraintSet.START, containerId, ConstraintSet.START, 8f.toPx())
-        constraintSet.connect(id, ConstraintSet.TOP, prevId, ConstraintSet.BOTTOM, 4f.toPx())
-        constraintSet.applyTo(container)
-
-        return id
-    }
-
-    private fun createTitipanItemActions(prevId: Int, goodId: String, status: Int, grocery: Boolean,
-                                         agentDest: String, estPrice: Int, pindahTitipPrice: Int) {
+    private fun createTitipanItemActions(prevId: Int, goodId: String, nama: String, status: Int,
+                                         grocery: Boolean, agentId: String, agentDest: String,
+                                         estPrice: Int, pindahTitipPrice: Int) {
 
         if(status == STORED || status == REJECTED || status == RETURNED || status == EXPIRED)
             return
 
-        val positiveId = createButtonPositive(prevId, goodId, status, grocery, agentDest,
-            estPrice, pindahTitipPrice)
-        if(status == NEW_GOODS) createButtonNegativeNewGoods(positiveId, goodId)
+        val positiveId = createButtonPositive(prevId, goodId, nama, status, grocery,
+            agentId, agentDest, estPrice, pindahTitipPrice)
+        if(status == NEW_GOODS) createButtonNegativeNewGoods(positiveId, goodId, nama)
     }
 
-    private fun createButtonPositive(prevId: Int, goodId: String, status: Int, grocery: Boolean,
-                                     agentDest: String, estPrice: Int, pindahTitipPrice: Int): Int {
+    private fun createButtonPositive(prevId: Int, goodId: String, nama: String, status: Int,
+                                     grocery: Boolean, agentId: String, agentDest: String,
+                                     estPrice: Int, pindahTitipPrice: Int): Int {
 
         val button = Button(this)
         button.layoutParams = Constraints.LayoutParams(
@@ -652,8 +622,8 @@ class Dashboard : AppCompatActivity() {
         button.textSize = 14f
 
         button.setOnClickListener {
-            buttonPositiveClickListener(goodId, status, grocery,
-                agentDest, estPrice, pindahTitipPrice)
+            buttonPositiveClickListener(goodId, nama, status, grocery,
+                agentId, agentDest, estPrice, pindahTitipPrice)
         }
 
         val container = findViewById<ConstraintLayout>(containerId)
@@ -670,7 +640,7 @@ class Dashboard : AppCompatActivity() {
         return id
     }
 
-    private fun createButtonNegativeNewGoods(positiveId: Int, goodId: String) {
+    private fun createButtonNegativeNewGoods(positiveId: Int, goodId: String, nama: String) {
         val button = Button(this)
         button.layoutParams = Constraints.LayoutParams(
             Constraints.LayoutParams.WRAP_CONTENT,
@@ -689,7 +659,7 @@ class Dashboard : AppCompatActivity() {
         button.textSize = 14f
 
         button.setOnClickListener {
-            buttonNegativeClickListener(goodId)
+            buttonNegativeClickListener(goodId, nama)
         }
 
         val container = findViewById<ConstraintLayout>(containerId)
@@ -702,14 +672,20 @@ class Dashboard : AppCompatActivity() {
         constraintSet.applyTo(container)
     }
 
-    private fun buttonPositiveClickListener(goodId: String, status: Int, grocery: Boolean,
-                                            agentDest: String,
+    private fun buttonPositiveClickListener(goodId: String, namaTitipan: String, status: Int,
+                                            grocery: Boolean, agentId: String, agentDest: String,
                                             estPrice: Int, pindahTitipPrice: Int) {
 
         val builder = AlertDialog.Builder(this)
 
         val db = FirebaseFirestore.getInstance()
         val doc = db.collection("goods").document(goodId)
+
+        val notifMgr = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notifBuilder = NotificationCompat.Builder(this, "Ti-Tip Agent")
+            .setSmallIcon(R.mipmap.ic_launcher)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setAutoCancel(true)
 
         when(status) {
             NEW_GOODS ->
@@ -745,6 +721,11 @@ class Dashboard : AppCompatActivity() {
                         )
                         doc.update(data)
                             .addOnSuccessListener {
+                                // Show notification
+                                notifBuilder.setContentTitle("Penerimaan titipan berhasil!")
+                                    .setContentText("Titipan $namaTitipan telah diterima")
+                                notifMgr.notify(0, notifBuilder.build())
+
                                 // Refresh the Dashboard
                                 finish()
                                 startActivity(intent)
@@ -762,6 +743,15 @@ class Dashboard : AppCompatActivity() {
                 .setPositiveButton("Konfirmasi") { _: DialogInterface, _: Int ->
                     doc.update("status", AWAITING_PINDAH_TITIP_DEST)
                         .addOnSuccessListener {
+                            // Show notification
+                            CoroutineScope(Dispatchers.Main).launch {
+                                val agentDestName = getAgentName(agentDest)
+                                notifBuilder.setContentTitle("Pindah Titip berhasil!")
+                                    .setContentText(
+                                        "Titipan $namaTitipan telah dikirim ke agen $agentDestName")
+                                notifMgr.notify(0, notifBuilder.build())
+                            }
+
                             // Refresh the Dashboard
                             finish()
                             startActivity(intent)
@@ -786,6 +776,17 @@ class Dashboard : AppCompatActivity() {
                     )
                     doc.update(data)
                         .addOnSuccessListener {
+                            // Show notification
+                            CoroutineScope(Dispatchers.Main).launch {
+                                val agentName = getAgentName(agentId)
+                                notifBuilder.setContentTitle("Penerimaan Pindah Titip berhasil!")
+                                    .setContentText(
+                                        "Titipan $namaTitipan telah diterima dari agen $agentName")
+                                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                    .setAutoCancel(true)
+                                notifMgr.notify(0, notifBuilder.build())
+                            }
+
                             // Refresh the Dashboard
                             finish()
                             startActivity(intent)
@@ -810,6 +811,11 @@ class Dashboard : AppCompatActivity() {
                     )
                     doc.update(data)
                         .addOnSuccessListener {
+                            // Show notification
+                            notifBuilder.setContentTitle("Pengembalian titipan berhasil!")
+                                .setContentText("Titipan $namaTitipan berhasil dikembalikan!")
+                            notifMgr.notify(0, notifBuilder.build())
+
                             // Refresh the Dashboard
                             finish()
                             startActivity(intent)
@@ -827,7 +833,7 @@ class Dashboard : AppCompatActivity() {
 
     }
 
-    private fun buttonNegativeClickListener(goodId: String) {
+    private fun buttonNegativeClickListener(goodId: String, namaTitipan: String) {
         val builder = AlertDialog.Builder(this)
         builder.setMessage("Konfirmasi untuk menolak titipan ini?")
             .setPositiveButton("Konfirmasi") { _: DialogInterface, _: Int ->
@@ -835,6 +841,17 @@ class Dashboard : AppCompatActivity() {
                 db.collection("goods").document(goodId)
                     .update("status", REJECTED)
                     .addOnSuccessListener {
+                        // Show notification
+                        val notifMgr = getSystemService(Context.NOTIFICATION_SERVICE)
+                                as NotificationManager
+                        val notifBuilder = NotificationCompat.Builder(this, "Ti-Tip Agent")
+                            .setSmallIcon(R.mipmap.ic_launcher)
+                            .setContentTitle("Pengembalian titipan berhasil!")
+                            .setContentText("Titipan $namaTitipan berhasil dikembalikan!")
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                            .setAutoCancel(true)
+                        notifMgr.notify(0, notifBuilder.build())
+
                         // Refresh the Dashboard
                         finish()
                         startActivity(intent)
