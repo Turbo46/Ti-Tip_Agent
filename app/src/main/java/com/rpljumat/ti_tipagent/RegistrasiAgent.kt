@@ -49,7 +49,6 @@ class RegistrasiAgent : AppCompatActivity() {
         regis_btn.setOnClickListener {
             val agentName = agent_name_text.text.toString()
             val pj = fullname_text.text.toString()
-            val username = username_text.text.toString()
             val nik = nik_text.text.toString()
             val phone = nope_text.text.toString()
             val email = email_text.text.toString()
@@ -65,11 +64,6 @@ class RegistrasiAgent : AppCompatActivity() {
                 pj.isEmpty() -> {
                     Toast.makeText(this@RegistrasiAgent,
                         "Nama penanggung jawab belum diisi!", Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
-                username.isEmpty() -> {
-                    Toast.makeText(this@RegistrasiAgent,
-                        "Username belum diisi!", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
                 nik.isEmpty() -> {
@@ -104,7 +98,7 @@ class RegistrasiAgent : AppCompatActivity() {
                 .addOnSuccessListener {
                     val agentId = auth.uid ?: ""
                     val db = FirebaseFirestore.getInstance()
-                    val agent = Agent(agentName, pj, username, nik, phone, coords)
+                    val agent = Agent(agentName, pj, nik, phone, coords)
 
                     db.collection("agent")
                         .document(agentId)

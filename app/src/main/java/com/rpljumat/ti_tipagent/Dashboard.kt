@@ -69,7 +69,8 @@ class Dashboard : AppCompatActivity() {
             }
 
         user_icon.setOnClickListener {
-            
+            val agentInfo = Intent(this, AgentInfo::class.java)
+            startActivity(agentInfo)
         }
 
         goods_history_btn_dashboard.setOnClickListener {

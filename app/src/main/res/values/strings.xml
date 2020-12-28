@@ -31,5 +31,14 @@
     <string name="centimeter">cm</string>
     <string name="kilogram">kg</string>
     <string name="title_activity_peta_daftar_agen">Map</string>
+    <string name="change">Ubah</string>
+    <string name="pj">Penanggung jawab</string>
+    <string name="change_password">Ubah kata sandi</string>
     <string name="logout">Keluar</string>
+    <string name="new_pj">Penanggung jawab baru:</string>
+    <string name="new_email">Email baru:</string>
+    <string name="new_password">Sandi baru:</string>
+    <string name="confirm_password">Konfirmasi sandi:</string>
+    <string name="new_phone">Nomor baru:</string>
+    <string name="curr_password">Sandi sekarang:</string>
 </resources>

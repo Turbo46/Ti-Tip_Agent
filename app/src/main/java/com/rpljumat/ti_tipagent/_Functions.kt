@@ -27,7 +27,7 @@ const val MS_SEHARI = 86_400_000
 val black = Color.parseColor("#000000")
 val red = Color.parseColor("#FF0000")
 
-class Agent(val agentName: String, val responsiblePerson: String, val username: String,
+class Agent(val agentName: String, val responsiblePerson: String,
             val nik: String, val phone: String, val pos: GeoPoint)
 
 fun Float.toPx(): Int = (this * Resources.getSystem().displayMetrics.density).toInt()
