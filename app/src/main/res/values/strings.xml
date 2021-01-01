@@ -5,7 +5,12 @@
     <string name="dashboard_active">Titipan</string>
     <string name="dashboard_more_active">Selengkapnya >></string>
     <string name="konfirmasi_titipan_agent">Konfirmasi Ringkasan Titipan Dari Customer</string>
-    <string name="tombol_konfirmasi">Terima</string>
+    <string name="nama_titipan_label">Nama titipan</string>
+    <string name="nama_penitip_label">Nama penitip</string>
+    <string name="dim_weight_label">Dimensi / berat</string>
+    <string name="biaya_penitipan_label">Biaya penitipan</string>
+    <string name="biaya_penitipan">Rp15000</string>
+    <string name="tombol_konfirmasi">Konfirmasi</string>
     <string name="username_label">Username</string>
     <string name="nope_label">Nomor HP</string>
     <string name="alamat_label">Alamat</string>
@@ -19,8 +24,6 @@
     <string name="register_question">Apakah anda tidak mempunyai akun?</string>
     <string name="reg_btn_txt">Registrasi</string>
     <string name="titipan_berjalan">Titipan berjalan</string>
-    <string name="peringatan_text">Anda masih bisa untuk mengubah pesanan</string>
-    <string name="lanjutan_text">sebelum melakukan konfirmasi</string>
     <string name="agent_name_label">Nama Agen</string>
     <string name="nama_penanggung_jawab">Nama Penanggung Jawab</string>
     <string name="titipan_baru_param_dimensi_txt">Dimensi:</string>
@@ -41,4 +44,5 @@
     <string name="confirm_password">Konfirmasi sandi:</string>
     <string name="new_phone">Nomor baru:</string>
     <string name="curr_password">Sandi sekarang:</string>
+    <string name="separ_slash">/</string>
 </resources>

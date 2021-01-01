@@ -61,14 +61,14 @@ class AgentInfo : AppCompatActivity() {
             doc.get()
                 .addOnSuccessListener {
                     val data = it.data!!
-                    val agentName = data["agentName"] as String
-                    val responsiblePerson = data["responsiblePerson"] as String
-                    val nik = data["nik"] as String
+                    val agentName = data["agentName"].toString()
+                    val responsiblePerson = data["responsiblePerson"].toString()
+                    val nik = data["nik"].toString()
                     val responsibleText = "$responsiblePerson - $nik"
                     val pos = data["pos"] as GeoPoint
                     val coords = Pair(pos.latitude, pos.longitude)
                     val agentLoc = getAgentLoc(coords, this@AgentInfo)
-                    val phone = data["phone"] as String
+                    val phone = data["phone"].toString()
                     val phoneMaskRule = Regex("^(\\d{4})\\d+(\\d{3})")
                     val maskedPhone = phone.replace(phoneMaskRule, "$1***$2")
 

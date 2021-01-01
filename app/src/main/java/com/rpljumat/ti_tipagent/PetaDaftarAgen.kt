@@ -9,27 +9,24 @@ import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_peta_daftar_agen.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -82,9 +79,10 @@ class PetaDaftarAgen : AppCompatActivity(), OnMapReadyCallback {
 
             // Pass address data to registration page
             val alamatRegis = Intent(this, RegistrasiAgent::class.java)
-            alamatRegis.putExtra("Alamat", "$addr")
-            alamatRegis.putExtra("Lintang", "$lat")
-            alamatRegis.putExtra("Bujur", "$long")
+            alamatRegis
+                .putExtra("Alamat", "$addr")
+                .putExtra("Lintang", lat)
+                .putExtra("Bujur", long)
             setResult(Activity.RESULT_OK, alamatRegis)
 
             finish()

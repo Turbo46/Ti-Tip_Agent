@@ -32,7 +32,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class Dashboard : AppCompatActivity() {
-    var conn = false
+    private var conn = false
 
     private var agentId = "null"
     private var containerId = 0
@@ -75,6 +75,7 @@ class Dashboard : AppCompatActivity() {
 
         goods_history_btn_dashboard.setOnClickListener {
             val riwayatTitipan = Intent(this, RiwayatTitipan::class.java)
+            riwayatTitipan.putExtra("Agent ID", agentId)
             startActivity(riwayatTitipan)
         }
 
@@ -124,6 +125,7 @@ class Dashboard : AppCompatActivity() {
 
         more_active.setOnClickListener {
             val titipanBerjalanAgent = Intent(this, TitipanBerjalanAgent::class.java)
+            titipanBerjalanAgent.putExtra("Agent ID", agentId)
             startActivity(titipanBerjalanAgent)
         }
     }
@@ -166,26 +168,31 @@ class Dashboard : AppCompatActivity() {
     }
 
     private fun settle(goods: QuerySnapshot) {
-        CoroutineScope(Dispatchers.Main).launch {
-            var prevIdAtt = title_need_attention.id
-            var prevIdActive = title_active.id
-            var attCnt = 0
-            var activeCnt = 0
+        var prevIdAtt = title_need_attention.id
+        var prevIdActive = title_active.id
+        var attCnt = 0
+        var activeCnt = 0
 
+        CoroutineScope(Dispatchers.Main).launch {
             for(good in goods) {
                 val goodId = good.id
                 val data = good.data
-                val goodAgentId = data["agentId"] as String
+                val goodAgentId = data["agentId"].toString()
                 val goodAgentDest = data["agentDest"].toString()
                 val status = (data["status"] as Long).toInt()
 
                 when(status) {
                     REJECTED, RETURNED, EXPIRED -> continue
+                    AWAITING_PINDAH_TITIP_DEST -> {
+                        if(goodAgentDest != agentId) continue
+                    }
+                    else -> {
+                        if(goodAgentId != agentId) continue
+                    }
                 }
-                if(!(status == AWAITING_PINDAH_TITIP_DEST).xor(goodAgentId == agentId)) continue
 
-                val nama = data["nama"] as String
-                val uId = data["userId"] as String
+                val nama = data["nama"].toString()
+                val uId = data["userId"].toString()
                 val userFullName = getUserFullName(uId)
                 val estPrice = (data["estPrice"] as Long).toInt()
                 val grocery = data["grocery"] as Boolean
@@ -249,8 +256,8 @@ class Dashboard : AppCompatActivity() {
                 prevIdInner = createTitipanItemExp(prevIdInner, exp)
 
                 // Action menus
-                createTitipanItemActions(prevIdInner, goodId, nama, status, grocery,
-                    goodAgentId, goodAgentDest, estPrice, pindahTitipPrice)
+                createTitipanItemActions(prevIdInner, goodId, nama, status, userFullName,
+                    grocery, fragile, goodAgentId, goodAgentDest, estPrice, pindahTitipPrice)
             }
 
             setAttCnt(attCnt)
@@ -324,7 +331,7 @@ class Dashboard : AppCompatActivity() {
         val id = View.generateViewId()
         statusTextView.id = id
 
-        val pair = status.getStatusInfo(status)
+        val pair = status.getStatusInfo()
         val text = pair.first
         val color = pair.second
         statusTextView.text = text
@@ -583,19 +590,21 @@ class Dashboard : AppCompatActivity() {
     }
 
     private fun createTitipanItemActions(prevId: Int, goodId: String, nama: String, status: Int,
-                                         grocery: Boolean, agentId: String, agentDest: String,
+                                         userFullName: String, grocery: Boolean, fragile: Boolean,
+                                         agentId: String, agentDest: String,
                                          estPrice: Int, pindahTitipPrice: Int) {
 
         if(status == STORED || status == REJECTED || status == RETURNED || status == EXPIRED)
             return
 
-        val positiveId = createButtonPositive(prevId, goodId, nama, status, grocery,
-            agentId, agentDest, estPrice, pindahTitipPrice)
+        val positiveId = createButtonPositive(prevId, goodId, nama, status, userFullName,
+            grocery, fragile, agentId, agentDest, estPrice, pindahTitipPrice)
         if(status == NEW_GOODS) createButtonNegativeNewGoods(positiveId, goodId, nama)
     }
 
     private fun createButtonPositive(prevId: Int, goodId: String, nama: String, status: Int,
-                                     grocery: Boolean, agentId: String, agentDest: String,
+                                     userFullName: String, grocery: Boolean, fragile: Boolean,
+                                     agentId: String, agentDest: String,
                                      estPrice: Int, pindahTitipPrice: Int): Int {
 
         val button = Button(this)
@@ -623,7 +632,7 @@ class Dashboard : AppCompatActivity() {
         button.textSize = 14f
 
         button.setOnClickListener {
-            buttonPositiveClickListener(goodId, nama, status, grocery,
+            buttonPositiveClickListener(goodId, nama, status, userFullName, grocery, fragile,
                 agentId, agentDest, estPrice, pindahTitipPrice)
         }
 
@@ -674,7 +683,9 @@ class Dashboard : AppCompatActivity() {
     }
 
     private fun buttonPositiveClickListener(goodId: String, namaTitipan: String, status: Int,
-                                            grocery: Boolean, agentId: String, agentDest: String,
+                                            userFullName: String,
+                                            grocery: Boolean, fragile: Boolean,
+                                            agentId: String, agentDest: String,
                                             estPrice: Int, pindahTitipPrice: Int) {
 
         val builder = AlertDialog.Builder(this)
@@ -722,14 +733,18 @@ class Dashboard : AppCompatActivity() {
                         )
                         doc.update(data)
                             .addOnSuccessListener {
-                                // Show notification
-                                notifBuilder.setContentTitle("Penerimaan titipan berhasil!")
-                                    .setContentText("Titipan $namaTitipan telah diterima")
-                                notifMgr.notify(0, notifBuilder.build())
-
-                                // Refresh the Dashboard
                                 finish()
-                                startActivity(intent)
+                                val konfirmasiAgent = Intent(this, KonfirmasiAgent::class.java)
+                                konfirmasiAgent
+                                    .putExtra("Nama Titipan", namaTitipan)
+                                    .putExtra("Nama Penitip", userFullName)
+                                    .putExtra("Fragile", fragile)
+                                    .putExtra("Grocery", grocery)
+                                    .putExtra("Panjang", length)
+                                    .putExtra("Lebar", width)
+                                    .putExtra("Tinggi", height)
+                                    .putExtra("Berat", weight)
+                                startActivity(konfirmasiAgent)
                             }
                             .addOnFailureListener {
 

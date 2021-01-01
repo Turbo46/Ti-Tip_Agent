@@ -6,21 +6,20 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_login_agent.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import kotlinx.android.synthetic.main.activity_login_agent.*
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 class LoginAgent : AppCompatActivity() {
-    var conn = false
+    private var conn = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,8 +56,9 @@ class LoginAgent : AppCompatActivity() {
                 .addOnSuccessListener {
                     currentUser = auth.currentUser
                     val agentId = currentUser!!.uid
+
+                    // Check if logged in into agent account
                     CoroutineScope(Dispatchers.Main).launch {
-                        // Check if logged in into agent account
                         val db = FirebaseFirestore.getInstance()
                         val agentDoc = db.collection("agent").document(agentId).get().await()
                         // Logout immediately if logged in into user account

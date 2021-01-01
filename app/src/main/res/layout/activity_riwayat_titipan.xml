@@ -60,11 +60,20 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@color/frame_back_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_history_logo">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/frame_back_bg">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

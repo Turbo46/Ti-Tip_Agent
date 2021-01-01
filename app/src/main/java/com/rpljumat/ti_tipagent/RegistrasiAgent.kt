@@ -23,7 +23,7 @@ import kotlinx.coroutines.withContext
 
 class RegistrasiAgent : AppCompatActivity() {
 
-    var conn = false
+    private var conn = false
 
     private var coords = GeoPoint(0.toDouble(), 0.toDouble())
 
@@ -139,13 +139,14 @@ class RegistrasiAgent : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+        super.onActivityResult(requestCode, resultCode, data!!)
 
         if(requestCode == ADDRESS_DATA) {
             if(resultCode == Activity.RESULT_OK) {
-                sel_loc_regis.text = data!!.getStringExtra("Alamat")
+                sel_loc_regis.text = data.getStringExtra("Alamat")
                 val lat = data.getDoubleExtra("Lintang", -6.208763)
                 val long = data.getDoubleExtra("Bujur", 106.845599)
+
                 coords = GeoPoint(lat, long)
             }
         }

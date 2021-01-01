@@ -39,7 +39,7 @@ fun Long.toDT(): String {
     return formatter.format(calendar.timeInMillis)
 }
 
-fun Int.getStatusInfo(status: Int): Pair<String, Int> {
+fun Int.getStatusInfo(): Pair<String, Int> {
     val statRed = R.color.stat_red
     val statOrange = R.color.stat_orange
     val statGreen = R.color.stat_green
